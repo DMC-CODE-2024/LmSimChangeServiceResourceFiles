@@ -6,8 +6,8 @@ dbDecryptPassword=$(java -jar  ${APP_HOME}/encryption_utility/PasswordDecryptor-
 mysql  -h$dbIp -P$dbPort -u$dbUsername -p${dbDecryptPassword} $appdbName <<EOFMYSQL
 
 
-insert into sys_param (description, tag, value, feature_name) SELECT 'The msisdn prefixes used to validate the dump files received from operators. The values can be comma-separated in case of multiple prefixes.', 'msisdnPrefix', '855', 'List Management' FROM dual WHERE NOT EXISTS ( SELECT * FROM sys_param WHERE tag = 'msisdnPrefix');
-insert into sys_param (description, tag, value, feature_name) SELECT 'The imsi prefixes used to validate the dump files received from operators. The values can be comma-separated in case of multiple prefixes.', 'imsiPrefix', '456', 'List Management' FROM dual WHERE NOT EXISTS ( SELECT * FROM sys_param WHERE tag = 'imsiPrefix');
+insert ignore into sys_param (description, tag, value, feature_name) SELECT 'The msisdn prefixes used to validate the dump files received from operators. The values can be comma-separated in case of multiple prefixes.', 'msisdnPrefix', '855', 'List Management' FROM dual WHERE NOT EXISTS ( SELECT * FROM sys_param WHERE tag = 'msisdnPrefix');
+insert ignore into sys_param (description, tag, value, feature_name) SELECT 'The imsi prefixes used to validate the dump files received from operators. The values can be comma-separated in case of multiple prefixes.', 'imsiPrefix', '456', 'List Management' FROM dual WHERE NOT EXISTS ( SELECT * FROM sys_param WHERE tag = 'imsiPrefix');
 
 insert ignore into cfg_feature_alert (alert_id, description, feature) values ("alert5400", "The Sim Change file not found at path <e> for operator <process_name>", "Sim_Change_Dump");
 insert ignore  into cfg_feature_alert (alert_id, description, feature) values ("alert5401", "The Sim Change file <e> does not contain new IMSI header for the operator <process_name>", "Sim_Change_Dump");
@@ -22,14 +22,8 @@ insert ignore  into cfg_feature_alert (alert_id, description, feature) values ("
 insert ignore  into cfg_feature_alert (alert_id, description, feature) values ("alert5410", "The Sim Change file <e> failed for uniqueness for old IMSI values for the operator <process_name>", "Sim_Change_Dump");
 insert ignore  into cfg_feature_alert (alert_id, description, feature) values ("alert5411", "The process failed for Sim Change with an exception <e> for operator <process_name>", "Sim_Change_Dump");
 insert ignore  into cfg_feature_alert (alert_id, description, feature)  values("alert5001", "The values for either IMSI Prefix or MSISDN prefix is missing in database.", "Sim_Change_Dump" );
-
-
 insert ignore  into cfg_feature_alert (alert_id, description, feature) values ("alert5412", "The Sim Change file <e> failed for unique values for MSISDN for operator <process_name>", "Sim_Change_Dump");
 insert ignore  into cfg_feature_alert (alert_id, description, feature) values ("alert5413", "Non-Numeric exists in Sim Change file <e> for operator <process_name>", "Sim_Change_Dump");
 insert ignore  into cfg_feature_alert (alert_id, description, feature) values ("alert5414", "The Sim Change file <e> failed for uniqueness of records for operator <process_name>", "Sim_Change_Dump");
-
-
-
-
 
 EOFMYSQL
