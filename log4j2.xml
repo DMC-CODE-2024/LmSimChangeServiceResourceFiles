@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="DEBUG">
+<Configuration status="INFO">
     
     <Properties>
         <Property name="app-logs-dir">${sys:log_path}</Property>
         <Property name="log-file-name">${sys:module_name}</Property>
     </Properties>
-
 
     <Appenders>
         <RollingFile name="LogToFile"
@@ -20,7 +19,6 @@
                 </Policies>
         </RollingFile>
     </Appenders>
-
 
     <Loggers>
             <Root level="${sys:log_level}">
