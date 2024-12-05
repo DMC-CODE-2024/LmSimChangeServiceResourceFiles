@@ -34,7 +34,7 @@ else  ## No process running
   mkdir -p $log_path
   echo "Starting ${module_name} module for operator $mno ..."
 
- java -Dlog4j.configurationFile=file:./log4j2.xml -Dlog_level=${log_level} -Dlog_path=${log_path} -Dmodule_name=${module_name}_${mno} -jar $build --spring.config.location=file:./application_${mno}.properties,file:${commonConfigurationFile} 1>/dev/null 2>${log_path}/${module_name}_${mno}.error &
+ java -Dlog4j.configurationFile=file:./log4j2.xml -Dlog.level=${log_level} -Dlog.path=${log_path} -Dmodule.name=${module_name}_${mno} -jar $build --spring.config.location=file:./application_${mno}.properties,file:${commonConfigurationFile} 1>/dev/null 2>${log_path}/${module_name}_${mno}.error &
 
 fi
 
